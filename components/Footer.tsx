@@ -1,7 +1,6 @@
 'use client'
-import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Facebook, Instagram } from 'lucide-react'
+import { Facebook, Instagram } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 interface FooterProps {

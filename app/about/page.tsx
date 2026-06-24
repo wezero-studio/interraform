@@ -3,24 +3,7 @@ import { useState, useEffect } from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Image from 'next/image'
-import Link from 'next/link'
-import { ArrowRight, MapPin } from 'lucide-react'
-
-const stats = [
-  { number: '35+', label: 'Years in Business' },
-  { number: '150+', label: 'Dedicated Experts' },
-  { number: '100+', label: 'Awards Won' },
-  { number: '25K', label: 'Sq. Ft. Facility' },
-]
-
-const awardImages = [
-  { src: 'https://www.serviceplusaquatics.com/images/Products/product1.webp', alt: 'Award winning pool design' },
-  { src: 'https://www.serviceplusaquatics.com/images/About/award2.webp', alt: 'Modern pool installation' },
-  { src: 'https://www.serviceplusaquatics.com/images/About/award3.webp', alt: 'Luxury spa design' },
-  { src: 'https://www.serviceplusaquatics.com/images/About/award4.webp', alt: 'Commercial pool project' },
-  { src: 'https://www.serviceplusaquatics.com/images/About/award5.webp', alt: 'Indoor pool excellence' },
-  { src: 'https://www.serviceplusaquatics.com/images/About/award6.webp', alt: 'Water feature design' },
-]
+import { ArrowRight } from 'lucide-react'
 
 export default function AboutPage() {
   const [animated, setAnimated] = useState(false)

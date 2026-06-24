@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 
 export default function QuoteSection() {
   const [animated, setAnimated] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
   const bgRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export default function QuoteSection() {
       </div>
       <div className="absolute inset-0 bg-black/75 z-0" />
 
-      <div ref={sectionRef as any} className="relative z-10 max-w-4xl mx-auto px-8 md:px-12 text-center flex flex-col items-center pt-8">
+      <div ref={sectionRef} className="relative z-10 max-w-4xl mx-auto px-8 md:px-12 text-center flex flex-col items-center pt-8">
         <h2 className="text-3xl md:text-5xl text-white leading-[1.3] mb-12 font-heading max-w-3xl">
           <span className="reveal-clip block">
             <span className="reveal-inner w-full block line-1">

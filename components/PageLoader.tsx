@@ -1,37 +1,36 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-
 import { usePathname } from 'next/navigation'
 
+// Module-level flag — resets on real page reload (module reload),
+// but survives React Strict Mode's double-mount within the same session.
+let loaderHasPlayed = false
+
 export default function PageLoader() {
-  const pathname = usePathname()
   const [exiting, setExiting] = useState(false)
   const [hidden, setHidden] = useState(false)
-
-  const isFirstLoad = useRef(true)
+  const pathname = usePathname()
+  const prevPathname = useRef(pathname)
 
   useEffect(() => {
     const pc = document.getElementById('page-content')
 
-    // Check if this is a hard reload/direct visit (no flag yet in session)
-    const isHardLoad = !sessionStorage.getItem('siteLoaded')
-
-    if (isFirstLoad.current && isHardLoad) {
-      // First hard load — show the full loader
-      isFirstLoad.current = false
-      sessionStorage.setItem('siteLoaded', '1')
-
-      setExiting(false)
-      setHidden(false)
+    if (!loaderHasPlayed) {
+      loaderHasPlayed = true
 
       if (pc) pc.style.opacity = '0'
       setTimeout(() => { if (pc) pc.style.opacity = '1' }, 100)
 
-      const exitTimer = setTimeout(() => setExiting(true), 1200)
-      const hideTimer = setTimeout(() => setHidden(true), 2000)
-      return () => { clearTimeout(exitTimer); clearTimeout(hideTimer) }
-    } else {
-      // Client-side navigation — skip loader entirely, just show content immediately
+      // No cleanup returned — timers must survive the strict-mode remount
+      // so the exit animation actually fires on the live component instance.
+      setTimeout(() => setExiting(true), 1200)
+      setTimeout(() => setHidden(true), 2000)
+      return
+    }
+
+    // Client-side navigation after the initial load
+    if (pathname !== prevPathname.current) {
+      prevPathname.current = pathname
       setHidden(true)
       if (pc) pc.style.opacity = '1'
     }
@@ -77,7 +76,6 @@ export default function PageLoader() {
           preserveAspectRatio="none"
           style={{ width: '100%', height: '120px', display: 'block', overflow: 'visible' }}
         >
-          {/* Top = full width straight. Bottom = concave curve (center arches up). All solid black. */}
           <path d="M0,0 L1440,0 L1440,120 Q720,-60 0,120 Z" fill="#000000" />
         </svg>
       </div>

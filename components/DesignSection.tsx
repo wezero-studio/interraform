@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { Layout, PenTool, Building2, Key } from 'lucide-react'
 

@@ -1,27 +1,40 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Lenis from 'lenis'
+import { usePathname } from 'next/navigation'
 
 export default function SmoothScroller({ children }: { children: React.ReactNode }) {
+  const lenisRef = useRef<Lenis | null>(null)
+  const pathname = usePathname()
+
   useEffect(() => {
-    // Initialize Lenis for luxurious, slow smooth scrolling
     const lenis = new Lenis({
-      lerp: 0.05, // Lower lerp means much slower, heavier, smoother scroll momentum
-      wheelMultiplier: 0.8, // Slows down the wheel step speed slightly
+      lerp: 0.05,
+      wheelMultiplier: 0.8,
     })
 
+    lenisRef.current = lenis
+
+    let rafId: number
     function raf(time: number) {
       lenis.raf(time)
-      requestAnimationFrame(raf)
+      rafId = requestAnimationFrame(raf)
     }
-
-    requestAnimationFrame(raf)
+    rafId = requestAnimationFrame(raf)
 
     return () => {
+      cancelAnimationFrame(rafId)
       lenis.destroy()
+      lenisRef.current = null
     }
   }, [])
+
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true })
+    }
+  }, [pathname])
 
   return <>{children}</>
 }

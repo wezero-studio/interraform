@@ -1,0 +1,26 @@
+[formatter.prettier]
+command = "prettier"
+options = ["--write"]
+includes = [
+  "*.ts",
+  "*.tsx",
+  "*.js",
+  "*.jsx",
+  "*.mjs",
+  "*.cjs",
+  "*.json",
+  "*.css",
+  "*.md",
+  "*.yaml",
+  "*.yml",
+]
+excludes = [
+  ".next/*",
+  "node_modules/*",
+  "bun.lock",
+  ".wrangler/*",
+]
+
+[formatter.nix]
+command = "nixfmt"
+includes = ["*.nix"]

@@ -61,7 +61,7 @@ export default function ContactPage() {
             <div className="mb-16">
               <h2 className="font-heading text-4xl md:text-5xl text-[#1a1a1a] font-medium mb-6 leading-tight max-w-2xl">
                 <span className="reveal-clip block">
-                  <span className="reveal-inner block line-1">Let's Build an</span>
+                  <span className="reveal-inner block line-1">Let&apos;s Build an</span>
                 </span>
                 <span className="reveal-clip block">
                   <span className="reveal-inner block line-2">Environment Where Your</span>
